@@ -522,7 +522,7 @@ class GPT(nn.Module):
 
         # Prepare for tensor/pipeline parallel
         try:
-            dist.init_process_group(backend='mpi')
+            dist.init_process_group(backend='nccl')
         except:
             print("[INFO] WARNING: Have initialized the process group")
         self.rank = dist.get_rank()

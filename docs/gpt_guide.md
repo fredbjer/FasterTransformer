@@ -392,6 +392,8 @@ python ../examples/onnx/multi_gpu_gpt/onnx_ckpt_convert.py -i gpt2-10.onnx -o ..
 ```bash
 git clone https://huggingface.co/gpt2-xl
 python ../examples/pytorch/gpt/utils/huggingface_gpt_convert.py -i gpt2-xl/ -o ../models/huggingface-models/c-model/gpt2-xl -i_g 1
+
+python3 ../examples/pytorch/gpt/utils/huggingface_gpt_convert.py -i /home/user/data/huggingface/gpt2-xl/ -o ../models/huggingface-models/c-model/gpt2-xl -i_g 1 -weight_data_type fp16
 ```
 
 ### Run GPT
@@ -425,6 +427,7 @@ python ../examples/pytorch/gpt/utils/huggingface_gpt_convert.py -i gpt2-xl/ -o .
 
     ```bash
     python ../examples/pytorch/gpt/utils/gpt_token_converter.py --vocab_file=../models/gpt2-vocab.json  --bpe_file=../models/gpt2-merges.txt
+    python3 ../examples/pytorch/gpt/utils/gpt_token_converter.py --vocab_file=/home/user/data/huggingface/gpt2-xl/vocab.json  --bpe_file=/home/user/data/huggingface/gpt2-xl/merges.txt
     ```
 
     By setting the `data_type` of `gpt_config.ini` to `fp16` or `bf16`, users can run gpt model under fp16 or bf16.
@@ -473,6 +476,8 @@ python ../examples/pytorch/gpt/utils/huggingface_gpt_convert.py -i gpt2-xl/ -o .
     ```bash
     # No parallelism (tensor_para_size=1, pipeline_para_size=1)
     python ../examples/pytorch/gpt/multi_gpu_gpt_example.py
+
+    torchrun ../examples/pytorch/gpt/multi_gpu_gpt_example.py --ckpt_path ../models/huggingface-models/c-model/gpt2-xl/1-gpu/ --vocab_file /home/user/data/huggingface/gpt2-xl/vocab.json --merges_file /home/user/data/huggingface/gpt2-xl/merges.txt
 
     # TP (tensor_para_size=8, pipeline_para_size=1)
     mpirun -n 8 --allow-run-as-root python ../examples/pytorch/gpt/multi_gpu_gpt_example.py --tensor_para_size=8 --pipeline_para_size=1 --ckpt_path="/workspace/fastertransformer/models/megatron-models/c-model/345m/8-gpu"

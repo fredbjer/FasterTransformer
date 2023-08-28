@@ -92,7 +92,6 @@ def split_and_convert(args):
 
     if(os.path.exists(saved_dir) == False):
         os.makedirs(saved_dir)
-    ckpt_name = args.in_file
 
     t_gpu_num = args.trained_gpu_num
     i_gpu_num = args.infer_gpu_num
