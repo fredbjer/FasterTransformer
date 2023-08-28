@@ -81,6 +81,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
+// T would be float/half/__nv_bfloat16 
 template<typename T>
 void multi_gpu_gpt_example(const INIReader reader, std::string in_csv)
 {
