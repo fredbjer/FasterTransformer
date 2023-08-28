@@ -420,7 +420,7 @@ python3 ../examples/pytorch/gpt/utils/huggingface_gpt_convert.py -i /home/user/d
     Users can see the details of arguments in `examples/cpp/multi_gpu_gpt/gpt_config.ini`. It controls the model path, model size, tensor parallelism size, and some hyper-parameters.
 
     ```bash
-    ./bin/multi_gpu_gpt_example
+    ./bin/gpt_example
     ```
 
     then use following script to convert the token ids to sentence.
