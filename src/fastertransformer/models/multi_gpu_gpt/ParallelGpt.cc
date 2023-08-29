@@ -951,7 +951,7 @@ void ParallelGpt<T>::forward(std::unordered_map<std::string, Tensor>*       outp
         }
         POP_RANGE;
 
-        // handle first step
+        // handle first step, begin here 
         if (has_p_prompt_tuning_ || has_prefix_prompt_ || has_prefix_soft_prompt_ || max_input_length > 1) {
             PUSH_RANGE("input tiling and init");
             invokeTileGptPromptInputs(tiled_input_ids_buf_,
