@@ -14,6 +14,7 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR) # for PyTorch extensions, version should be greater than 3.13
 project(FasterTransformer LANGUAGES CXX CUDA)
 
+# >= 10.2 
 find_package(CUDA 10.2 REQUIRED)
 
 if(${CUDA_VERSION_MAJOR} VERSION_GREATER_EQUAL "11")
@@ -46,9 +47,11 @@ endif()
 
 option(BUILD_TF "Build in TensorFlow mode" OFF)
 option(BUILD_TF2 "Build in TensorFlow2 mode" OFF)
-option(BUILD_PYT "Build in PyTorch TorchScript class mode" OFF)
+option(BUILD_PYT "Build in PyTorch TorchScript class mode" ON)
 option(BUILD_TRT "Build projects about TensorRT" OFF)
 option(GIT_AUTOCLONE_CUTLASS "Check submodules during build" ON)
+
+option(BUILD_MULTI_GPU ON)
 if(NOT BUILD_MULTI_GPU)
   option(BUILD_MULTI_GPU "Build project about multi-GPU" OFF)
 endif()
@@ -81,7 +84,7 @@ if(BUILD_MULTI_GPU)
   add_definitions("-DBUILD_MULTI_GPU")
   set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/Modules)
   find_package(MPI REQUIRED)
-  find_package(NCCL REQUIRED)
+  find_package(NCCL REQUIRED) # Found NCCL (include: /usr/include, library: /usr/lib/x86_64-linux-gnu/libnccl.so)
   set(CMAKE_MODULE_PATH "") # prevent the bugs for pytorch building
 endif()
 
@@ -283,7 +286,7 @@ endif()
 
 if (BUILD_MULTI_GPU)
   list(APPEND COMMON_HEADER_DIRS ${MPI_INCLUDE_PATH})
-  list(APPEND COMMON_LIB_DIRS /usr/local/mpi/lib)
+  list(APPEND COMMON_LIB_DIRS /opt/openmpi-413/lib)
 endif()
 
 if(USE_TRITONSERVER_DATATYPE)

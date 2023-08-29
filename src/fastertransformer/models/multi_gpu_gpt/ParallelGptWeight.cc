@@ -124,7 +124,7 @@ ParallelGptWeight<T>::ParallelGptWeight(const ParallelGptWeight& other):
 {
     mallocWeights();
     if (gpt_variant_params_.has_positional_encoding) {
-        cudaD2Dcpy(weights_ptr[0], other.weights_ptr[0], max_seq_len_ * vocab_size_);
+        cudaD2Dcpy(weights_ptr[0], other.weights_ptr[0], max_seq_len_ * hidden_units_);
     }
     cudaD2Dcpy(weights_ptr[1], other.weights_ptr[1], vocab_size_ * hidden_units_);
     if (gpt_variant_params_.has_pre_decoder_layernorm) {
@@ -181,7 +181,7 @@ ParallelGptWeight<T>& ParallelGptWeight<T>::operator=(const ParallelGptWeight& o
 
     mallocWeights();
     if (gpt_variant_params_.has_positional_encoding) {
-        cudaD2Dcpy(weights_ptr[0], other.weights_ptr[0], max_seq_len_ * vocab_size_);
+        cudaD2Dcpy(weights_ptr[0], other.weights_ptr[0], max_seq_len_ * hidden_units_);
     }
     cudaD2Dcpy(weights_ptr[1], other.weights_ptr[1], vocab_size_ * hidden_units_);
     if (gpt_variant_params_.has_pre_decoder_layernorm) {
@@ -256,7 +256,7 @@ void ParallelGptWeight<T>::mallocWeights()
     weights_ptr.resize(num_base_weights + prompt_learning_pair_.size());
 
     if (gpt_variant_params_.has_positional_encoding) {
-        deviceMalloc(&weights_ptr[0], max_seq_len_ * vocab_size_);
+        deviceMalloc(&weights_ptr[0], max_seq_len_ * hidden_units_);
     }
     // word embedding table.
     deviceMalloc(&weights_ptr[1], vocab_size_ * hidden_units_);
