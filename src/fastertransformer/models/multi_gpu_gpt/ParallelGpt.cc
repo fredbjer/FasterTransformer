@@ -901,7 +901,7 @@ void ParallelGpt<T>::forward(std::unordered_map<std::string, Tensor>*       outp
                                   stream_);
             cudaD2Hcpy(&compact_size, compact_size_, 1);
             use_shared_contexts = compact_size <= shared_contexts_ratio_ * batch_size;
-            sync_check_cuda_error();
+            sync_check_cuda_error(); // here 
         }
         POP_RANGE;
 
@@ -966,7 +966,7 @@ void ParallelGpt<T>::forward(std::unordered_map<std::string, Tensor>*       outp
                                       beam_width,
                                       max_input_length,
                                       stream_);
-            sync_check_cuda_error();
+            sync_check_cuda_error(); // here 
             POP_RANGE;
 
             if (has_prefix_soft_prompt_) {
@@ -1017,7 +1017,7 @@ void ParallelGpt<T>::forward(std::unordered_map<std::string, Tensor>*       outp
                                                          batch_size * beam_width,
                                                          hidden_units_,
                                                          stream_);
-                sync_check_cuda_error();
+                sync_check_cuda_error(); //here 
                 POP_RANGE;
             }
 

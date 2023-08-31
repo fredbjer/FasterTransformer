@@ -404,10 +404,10 @@ protected:
     std::set<int> mValidSequences;
 };
 
-template<typename TFusedMHAKernelList>
+template<typename TFusedMHAKernelList> // FusedMultiHeadAttentionXMMAKernelV2
 class TFusedMHAKernelFactory {
 public:
-    const TFusedMHAKernelList* getXMMAKernels(const typename TFusedMHAKernelList::KernelMeta* pKernelList,
+    const TFusedMHAKernelList* getXMMAKernels(const typename TFusedMHAKernelList::KernelMeta* pKernelList, // FusedMultiHeadAttentionKernelMetaInfoV2
                                               unsigned int nbKernels,
                                               Data_type type,
                                               unsigned int sm)
