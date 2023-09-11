@@ -187,7 +187,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('-saved_dir', '-o', type=str, help='file name of output file', required=True)
     parser.add_argument('-in_file', '-i', type=str, help='file name of input checkpoint file', required=True)
-    parser.add_argument('-trained_gpu_num', '-t_g', type=int, help='How many gpus for inference', default=1)
+    parser.add_argument('-trained_gpu_num', '-t_g', type=int, help='How many gpus for train', default=1)
     parser.add_argument('-infer_gpu_num', '-i_g', type=int, help='How many gpus for inference', required=True)
     parser.add_argument("-processes", "-p", type=int, help="How many processes to spawn for conversion (default: 4)", default=4)
     parser.add_argument("-weight_data_type", type=str, default="fp32", choices=["fp32", "fp16"])

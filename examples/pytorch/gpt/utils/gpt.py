@@ -503,7 +503,7 @@ class GPT(nn.Module):
         assert head_num % tensor_para_size == 0, "head_num must be a multiple of tensor_para_size."
         assert layer_num % pipeline_para_size == 0, "layer_num must be a multiple of pipeline_para_size."
 
-        # Load the C++ model into Pytorch model.
+        # Load the C++ model into Pytorch model. Load ./lib/libth_transformer.so 
         torch.classes.load_library(os.path.abspath(lib_path))
 
         # Prepare weights

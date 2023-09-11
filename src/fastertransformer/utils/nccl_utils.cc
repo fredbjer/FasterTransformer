@@ -305,6 +305,7 @@ void ftNcclParamDestroy(NcclParam& param)
 #endif
 }
 
+// https://zhuanlan.zhihu.com/p/629121480
 void ftNcclInitialize(NcclParam& tensor_para,
                       NcclParam& pipeline_para,
                       const int  tensor_para_size,

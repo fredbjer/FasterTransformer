@@ -270,7 +270,7 @@ void ParallelGptWeight<T>::mallocWeights()
         deviceMalloc(&weights_ptr[4], hidden_units_);
         deviceMalloc(&weights_ptr[5], hidden_units_);
     }
-    // deceder embedding table.
+    // decoder embedding table.
     deviceMalloc(&weights_ptr[6], hidden_units_ * vocab_size_);
 
     // prompt learning tables: malloc weights

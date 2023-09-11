@@ -205,6 +205,7 @@ std::vector<th::Tensor> ParallelGptOp::forward(th::Tensor               input_id
 
 }  // namespace torch_ext
 
+// https://pytorch.org/tutorials/advanced/torch_script_custom_classes.html
 static auto fasterTransformerGptTHS =
 #ifdef LEGACY_THS
     torch::jit::class_<torch_ext::ParallelGptOp>("FasterTransformerParallelGptOp")
